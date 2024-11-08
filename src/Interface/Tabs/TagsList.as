@@ -28,6 +28,15 @@ class TagsListTab : MapListTab
         }
     }
 
+    void StartRequest() override
+    {
+        if (m_selectedTags.Length == 0) {
+            return;
+        }
+
+        MapListTab::StartRequest();
+    }
+
     void RenderHeader() override
     {
         string selectedTagsNames = "";
@@ -74,12 +83,12 @@ class TagsListTab : MapListTab
             if (UI::Selectable("Latest", t_selectedSort == "Latest")){
                 t_selectedSort = "Latest";
                 t_selectedPriord = "-1";
-                Reload();
+                if (maps.Length > 0) Reload();
             }
             if (UI::Selectable("Most Awarded", t_selectedSort == "Most Awarded")){
                 t_selectedSort = "Most Awarded";
                 t_selectedPriord = "8";
-                Reload();
+                if (maps.Length > 0) Reload();
             }
             UI::EndCombo();
         }
